@@ -1,21 +1,33 @@
-# Pay to Par — Phase 4.1
+# Pay to Par — Phase 4.2 Repair
 
-This refinement updates two areas after phone testing.
+This build corrects the inconsistent Phase 4.1 package.
 
-## Changes
+## Corrected
 
-- Wheel of Shame is now heavily weighted toward comedy.
-- Direct one-stroke punishment is uncommon.
-- Flamingo, Happy Gilmore, Cinderella, and PGA Announcer are the most likely results.
-- Cheat Confiscation remains possible but less common than the performance punishments.
-- The Rules screen is now a true **How to Play** section.
-- The overview explains:
-  - Why Pay to Par exists
-  - How to configure the match
-  - How cheats work
-  - What happens after cheats run out
-  - How The Nark works
-  - The overall goal of the game
-- The cheat glossary, Nark rules, and Wheel outcomes remain available as separate tabs.
+- Home screen now identifies Phase Four.
+- The hero **Start a round** button uses the same working route as the lower New Round card.
+- Rules now opens to a real **How to Play** overview.
+- Overview, Cheats, The Nark, and Wheel are separate tabs.
+- Comedy-weighted Wheel of Shame remains enabled.
+- `gameplay.js` and `nark.js` are included in the offline asset list.
+- App files now load network-first, using the cache only when offline.
+- CSS and JavaScript references include a version marker to force browsers to request the repaired files.
 
-Upload the contents of the enclosed `pay-to-par` folder to the root of the existing GitHub repository and replace matching files.
+## Upload
+
+Replace every matching file in the GitHub repository with this package, including:
+
+- `index.html`
+- `sw.js`
+- `css/main.css`
+- all files in `js/`
+
+After GitHub Pages finishes deploying, open the site once with:
+
+`?v=42`
+
+Example:
+
+`https://YOUR-NAME.github.io/pay-to-par/?v=42`
+
+The new service worker should then take control and future deployments should update much more reliably.

@@ -997,3 +997,9 @@ button:focus-visible, input:focus-visible {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
+/* Phase 4.2 cache repair */
+@media (max-width: 390px) {
+  .rule-tabs { grid-template-columns: repeat(2, 1fr); }
+}

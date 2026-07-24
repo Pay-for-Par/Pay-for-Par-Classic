@@ -22,7 +22,7 @@ export function homeView() {
 
       <div class="section-heading">
         <div><p class="eyebrow">Clubhouse</p><h2>Pick your poison</h2></div>
-        <p>Phase Three</p>
+        <p>Phase Four</p>
       </div>
 
       <div class="action-grid">
@@ -78,17 +78,17 @@ export { setupView as newRoundView };
 export function rulesView() {
   return `<section class="page">
       <p class="eyebrow">Read it before arguing</p>
-      <h1 class="page-title">Rules & Cheat Glossary</h1>
-      <p class="page-lead">Fast enough to read on the first tee. Clear enough to settle the argument on the 14th.</p>
+      <h1 class="page-title">How to Play</h1>
+      <p class="page-lead">A quick explanation of the game, followed by the cheat glossary, The Nark, and the Wheel of Shame.</p>
       <div class="rule-tabs">
-        <button class="tab-button active" data-rule-tab="cheats">Cheats</button>
+        <button class="tab-button active" data-rule-tab="overview">Overview</button>
+        <button class="tab-button" data-rule-tab="cheats">Cheats</button>
         <button class="tab-button" data-rule-tab="nark">The Nark</button>
         <button class="tab-button" data-rule-tab="wheel">Wheel</button>
       </div>
-      <div id="rulesContent">${cheatsMarkup()}</div>
+      <div id="rulesContent">${overviewMarkup()}</div>
     </section>`;
 }
-
 
 function overviewMarkup() {
   return `<div class="panel how-to-panel">
