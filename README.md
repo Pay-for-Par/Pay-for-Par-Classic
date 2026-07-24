@@ -1,61 +1,30 @@
-# Pay to Par — Phase One
+# Pay to Par — Phase Two
 
 **The score you'll tell everyone you shot anyway.**
 
-This repository contains the Phase One foundation for the Pay to Par progressive web app.
+Phase Two adds a complete, persistent round-configuration workflow to the Phase One PWA shell.
 
 ## Included
 
-- Mobile-first app shell
-- Pay to Par branding and visual system
-- Hash-based navigation
-- Home, New Round, Rules, History and Settings screens
-- Working cheat glossary
-- The Nark and Wheel of Shame rules
-- Installable PWA manifest
-- Offline service worker
-- Responsive layout for phone and desktop testing
+- Mobile-first visual system and navigation
+- “What is Pay to Par?” introduction
+- Cheat glossary, The Nark and Wheel of Shame rules
+- Three-step round setup
+- Add/remove up to eight golfers
+- Suggested Scratch, Weekend Warrior and Just Keep It Fun packages
+- Per-player package customization with +/− controls
+- Modified-package indicator and one-tap package reset
+- Round options for The Nark, Wheel of Shame and history
+- Configured round saved locally for Phase Three gameplay
+- Installable/offline PWA
 
-Gameplay and round setup are intentionally marked as Phase Two work.
+## Update an existing GitHub Pages repository
 
-## Run locally
+Upload the contents of this folder to the repository root and allow the files with the same names to be replaced. Two new JavaScript files are included:
 
-Because the app uses ES modules and a service worker, serve the folder over HTTP:
+- `js/state.js`
+- `js/setup.js`
 
-```bash
-python3 -m http.server 8080
-```
+GitHub Pages will rebuild automatically after the commit.
 
-Then visit:
-
-```text
-http://localhost:8080
-```
-
-## GitHub Pages
-
-1. Upload all files and folders to the root of your repository.
-2. Open **Settings → Pages**.
-3. Select **Deploy from a branch**.
-4. Choose the `main` branch and `/root`.
-5. Save.
-
-The relative file paths are already configured for a project-site deployment.
-
-## Structure
-
-```text
-pay-to-par/
-├── index.html
-├── manifest.webmanifest
-├── sw.js
-├── css/
-│   └── main.css
-├── js/
-│   ├── app.js
-│   ├── data.js
-│   ├── router.js
-│   └── views.js
-└── assets/
-    └── icons/
-```
+Because this is a PWA, an installed or previously visited version can temporarily show cached Phase One files. Close and reopen it, or refresh the browser once the Pages deployment finishes.
