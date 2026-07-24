@@ -301,7 +301,21 @@ export function handleNarkClick(target, rerender, showToast) {
 
     const wheel = document.getElementById('shameWheel');
     const segments = wheelSegments();
-    const selectedIndex = Math.floor(Math.random() * segments.length);
+
+    // Weighted toward comedy: the five performance-based outcomes appear
+    // far more often than the direct stroke penalty.
+    // Index order follows WHEEL in data.js:
+    // 0 One Stroke, 1 Flamingo, 2 Happy Gilmore,
+    // 3 Cinderella, 4 PGA Announcer, 5 Cheat Confiscation.
+    const weightedIndices = [
+      0,
+      1, 1, 1, 1,
+      2, 2, 2, 2,
+      3, 3, 3, 3,
+      4, 4, 4, 4,
+      5, 5
+    ];
+    const selectedIndex = weightedIndices[Math.floor(Math.random() * weightedIndices.length)];
     const segmentAngle = 360 / segments.length;
     const rotations = 5 + Math.floor(Math.random() * 3);
     const finalAngle = rotations * 360 + (360 - (selectedIndex * segmentAngle + segmentAngle / 2));

@@ -273,7 +273,7 @@ button:focus-visible, input:focus-visible {
 
 .rule-tabs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   margin-bottom: 15px;
 }
@@ -981,4 +981,19 @@ button:focus-visible, input:focus-visible {
 
 @media (min-width: 620px) {
   .nark-player-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+
+/* Phase 4.1: How to Play refinements */
+.how-to-panel .rule-copy:first-child h3 {
+  margin-top: 0;
+  font-size: 1.35rem;
+}
+.how-to-panel .rule-copy p {
+  line-height: 1.62;
+}
+@media (max-width: 390px) {
+  .rule-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

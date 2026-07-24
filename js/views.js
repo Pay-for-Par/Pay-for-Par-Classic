@@ -89,6 +89,37 @@ export function rulesView() {
     </section>`;
 }
 
+
+function overviewMarkup() {
+  return `<div class="panel how-to-panel">
+    <div class="rule-copy">
+      <p class="eyebrow">Welcome to Pay to Par</p>
+      <h3>Where golf becomes almost secondary to making memories.</h3>
+      <p>Most casual golfers already take the official rules of golf a little lightly. Pay to Par takes the way many of us are already playing and turns it into a more entertaining, strategic game.</p>
+    </div>
+
+    <div class="rule-copy">
+      <h3>Set up the match</h3>
+      <p>Add the players, choose a suggested cheat package for each golfer, and customize any package the group wants to change. Every cheat must be approved before the round begins.</p>
+    </div>
+
+    <div class="rule-copy">
+      <h3>Use your cheats wisely</h3>
+      <p>Use cheats whenever their rules allow, but choose carefully. Once your cheats are gone, you are playing on pure skill—or luck.</p>
+    </div>
+
+    <div class="rule-copy">
+      <h3>Unauthorized cheating</h3>
+      <p>If another player catches you using a non-preapproved cheat, they can call The Nark before the group leaves the hole. The group votes, and a guilty player faces confiscation, a stroke, or the Wheel of Shame.</p>
+    </div>
+
+    <div class="rule-copy">
+      <h3>The goal</h3>
+      <p>The golfer with the lowest score still wins. The real point is to keep everyone involved, reduce frustration, create strategy, and leave the course with stories worth retelling.</p>
+    </div>
+  </div>`;
+}
+
 function cheatsMarkup() {
   return `<div class="cheat-list">${CHEATS.map((c) => `<article class="cheat-item">
       <button class="cheat-summary" data-cheat-toggle><span class="cheat-emoji">${c.icon}</span><span><strong>${c.name}</strong></span><span>＋</span></button>
@@ -120,7 +151,8 @@ export function settingsView() {
 }
 
 export function renderRuleTab(tab) {
+  if (tab === 'cheats') return cheatsMarkup();
   if (tab === 'nark') return narkMarkup();
   if (tab === 'wheel') return wheelMarkup();
-  return cheatsMarkup();
+  return overviewMarkup();
 }

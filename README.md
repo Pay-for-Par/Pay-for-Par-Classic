@@ -1,38 +1,21 @@
-# Pay to Par — Phase Four
+# Pay to Par — Phase 4.1
 
-**The score you'll tell everyone you shot anyway.**
+This refinement updates two areas after phone testing.
 
-Phase Four adds The Nark and the animated Wheel of Shame to the live round.
+## Changes
 
-## Included
+- Wheel of Shame is now heavily weighted toward comedy.
+- Direct one-stroke punishment is uncommon.
+- Flamingo, Happy Gilmore, Cinderella, and PGA Announcer are the most likely results.
+- Cheat Confiscation remains possible but less common than the performance punishments.
+- The Rules screen is now a true **How to Play** section.
+- The overview explains:
+  - Why Pay to Par exists
+  - How to configure the match
+  - How cheats work
+  - What happens after cheats run out
+  - How The Nark works
+  - The overall goal of the game
+- The cheat glossary, Nark rules, and Wheel outcomes remain available as separate tabs.
 
-- Everything from Phases One through Three
-- Large Nark button in the live scorecard
-- Accused-player selection
-- Offense selection
-- Group guilty / not-guilty vote
-- Cheat confiscation
-- One-stroke penalty
-- Animated segmented Wheel of Shame
-- Wheel results:
-  - One Stroke
-  - Flamingo
-  - Happy Gilmore
-  - Cinderella
-  - PGA Announcer
-  - Cheat Confiscation
-- Saved Nark cases and punishment history
-- Automatic handling when no cheats remain
-- Updated offline PWA cache
-
-## GitHub Pages update
-
-Upload the contents of this folder to the root of the existing repository and replace matching files.
-
-The new file in this phase is:
-
-```text
-js/nark.js
-```
-
-GitHub Pages will redeploy automatically after the commit.
+Upload the contents of the enclosed `pay-to-par` folder to the root of the existing GitHub repository and replace matching files.
