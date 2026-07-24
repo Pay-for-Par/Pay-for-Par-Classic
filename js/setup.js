@@ -194,9 +194,11 @@ export function handleSetupClick(target, showToast) {
   }
   if (action === 'back') { draft.step = Math.max(1, draft.step - 1); rerender(); return true; }
   if (action === 'start') {
-    const round = saveConfiguredRound(draft);
-    draft.completedRound = round;
-    rerender(); return true;
+    saveConfiguredRound(draft);
+    draft.completedRound = null;
+    saveDraft(draft);
+    location.hash = '#round';
+    return true;
   }
 
   if (target.closest('#addPlayerButton')) {

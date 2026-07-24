@@ -22,12 +22,14 @@ export function homeView() {
 
       <div class="section-heading">
         <div><p class="eyebrow">Clubhouse</p><h2>Pick your poison</h2></div>
-        <p>Phase Two</p>
+        <p>Phase Three</p>
       </div>
 
       <div class="action-grid">
-        <button class="action-card" data-route="new-round">
-          <span class="action-icon">＋</span><strong>New Round</strong><small>Add players, choose packages and configure the match.</small>
+        <button class="action-card" data-route="${localStorage.getItem('pay_to_par_active_round_v3') ? 'round' : 'new-round'}">
+          <span class="action-icon">${localStorage.getItem('pay_to_par_active_round_v3') ? '▶' : '＋'}</span>
+          <strong>${localStorage.getItem('pay_to_par_active_round_v3') ? 'Resume Round' : 'New Round'}</strong>
+          <small>${localStorage.getItem('pay_to_par_active_round_v3') ? 'Return to the live scorecard.' : 'Add players, choose packages and configure the match.'}</small>
         </button>
         <button class="action-card" data-route="rules">
           <span class="action-icon">♧</span><strong>Rules</strong><small>Cheat glossary, The Nark and Wheel of Shame.</small>

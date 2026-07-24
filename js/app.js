@@ -1,10 +1,13 @@
 import { registerRoute, navigate, currentRoute } from './router.js';
 import { homeView, aboutView, newRoundView, rulesView, historyView, settingsView, renderRuleTab } from './views.js';
 import { handleSetupClick, handleSetupInput } from './setup.js';
+import { gameplayView, handleGameplayClick } from './gameplay.js';
+import { getActiveRound } from './state.js';
 
 registerRoute('home', homeView);
 registerRoute('about', aboutView);
 registerRoute('new-round', newRoundView);
+registerRoute('round', gameplayView);
 registerRoute('rules', rulesView);
 registerRoute('history', historyView);
 registerRoute('settings', settingsView);
@@ -19,6 +22,7 @@ function showToast(message) {
 
 document.addEventListener('click', (event) => {
   if (currentRoute() === 'new-round' && handleSetupClick(event.target, showToast)) return;
+  if (currentRoute() === 'round' && handleGameplayClick(event.target, showToast)) return;
 
   const routeTarget = event.target.closest('[data-route]');
   if (routeTarget) { navigate(routeTarget.dataset.route); return; }
@@ -47,7 +51,13 @@ document.addEventListener('change', (event) => {
 });
 
 window.addEventListener('hashchange', () => navigate(currentRoute()));
-navigate(currentRoute());
+
+const initialRoute = currentRoute();
+if (initialRoute === 'home' && getActiveRound()) {
+  navigate('round');
+} else {
+  navigate(initialRoute);
+}
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));

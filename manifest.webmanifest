@@ -1,7 +1,7 @@
 {
   "name": "Pay to Par",
   "short_name": "Pay to Par",
-  "description": "The score you'll tell everyone you shot anyway.",
+  "description": "The score you'll tell everyone you shot anyway. Configure a match, track scores and use your cheats.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

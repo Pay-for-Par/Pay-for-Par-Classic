@@ -1,7 +1,8 @@
 import { PACKAGES } from './data.js';
 
-const DRAFT_KEY = 'pay_to_par_setup_draft_v2';
-const ROUND_KEY = 'pay_to_par_configured_round_v2';
+const DRAFT_KEY = 'pay_to_par_setup_draft_v3';
+const ROUND_KEY = 'pay_to_par_active_round_v3';
+const HISTORY_KEY = 'pay_to_par_history_v3';
 
 function uid() {
   return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
@@ -52,11 +53,16 @@ export function clearDraft() {
   localStorage.removeItem(DRAFT_KEY);
 }
 
+function makeHole() {
+  return { score: null, usedCheats: [] };
+}
+
 export function saveConfiguredRound(draft) {
   const round = {
     id: uid(),
     name: draft.roundName.trim() || todayName(),
     createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     options: { ...draft.options },
     players: draft.players
       .filter((player) => player.name.trim())
@@ -64,15 +70,46 @@ export function saveConfiguredRound(draft) {
         ...player,
         name: player.name.trim(),
         startingInventory: { ...player.inventory },
-        remainingInventory: { ...player.inventory }
+        remainingInventory: { ...player.inventory },
+        holes: Array.from({ length: 18 }, makeHole)
       })),
-    status: 'configured'
+    currentHole: 1,
+    status: 'active',
+    actionLog: []
   };
   localStorage.setItem(ROUND_KEY, JSON.stringify(round));
   return round;
 }
 
-export function getConfiguredRound() {
-  try { return JSON.parse(localStorage.getItem(ROUND_KEY)); }
-  catch { return null; }
+export function getActiveRound() {
+  try {
+    const round = JSON.parse(localStorage.getItem(ROUND_KEY));
+    return round?.status === 'active' ? round : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveActiveRound(round) {
+  round.updatedAt = new Date().toISOString();
+  localStorage.setItem(ROUND_KEY, JSON.stringify(round));
+}
+
+export function clearActiveRound() {
+  localStorage.removeItem(ROUND_KEY);
+}
+
+export function getHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveCompletedRound(round) {
+  if (!round.options.history) return;
+  const history = getHistory();
+  history.unshift(round);
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 50)));
 }

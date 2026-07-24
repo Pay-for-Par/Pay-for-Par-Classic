@@ -1,30 +1,36 @@
-# Pay to Par — Phase Two
+# Pay to Par — Phase Three
 
 **The score you'll tell everyone you shot anyway.**
 
-Phase Two adds a complete, persistent round-configuration workflow to the Phase One PWA shell.
+Phase Three turns the configured match into a playable on-course scorecard.
 
 ## Included
 
-- Mobile-first visual system and navigation
-- “What is Pay to Par?” introduction
-- Cheat glossary, The Nark and Wheel of Shame rules
-- Three-step round setup
-- Add/remove up to eight golfers
-- Suggested Scratch, Weekend Warrior and Just Keep It Fun packages
-- Per-player package customization with +/− controls
-- Modified-package indicator and one-tap package reset
-- Round options for The Nark, Wheel of Shame and history
-- Configured round saved locally for Phase Three gameplay
-- Installable/offline PWA
+- Everything from Phases One and Two
+- 18-hole navigation and quick hole picker
+- Score entry for every golfer
+- Running totals
+- Remaining cheat inventory
+- Tap-to-use cheat confirmation
+- Automatic inventory decrementing
+- Undo last cheat used on the current hole
+- Hole-complete indicators
+- Per-player detail card with remaining and used cheats
+- Automatic local saving after every action
+- Automatic round resume after closing or refreshing the app
+- Offline PWA support
 
-## Update an existing GitHub Pages repository
+## Not yet included
 
-Upload the contents of this folder to the repository root and allow the files with the same names to be replaced. Two new JavaScript files are included:
+- The Nark workflow and animated Wheel of Shame — Phase Four
+- Final results, awards and saved round history — Phase Five
 
-- `js/state.js`
-- `js/setup.js`
+## GitHub Pages update
 
-GitHub Pages will rebuild automatically after the commit.
+Upload the contents of this folder to the root of the existing repository and replace matching files. The new file in this phase is:
 
-Because this is a PWA, an installed or previously visited version can temporarily show cached Phase One files. Close and reopen it, or refresh the browser once the Pages deployment finishes.
+```text
+js/gameplay.js
+```
+
+GitHub Pages will redeploy automatically after the commit.
