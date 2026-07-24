@@ -1,3 +1,4 @@
+import { startingCheatCard, shareText } from './share.js';
 import { CHEATS, PACKAGES } from './data.js';
 import { cloneInventory, loadDraft, makePlayer, saveConfiguredRound, saveDraft } from './state.js';
 
@@ -193,6 +194,15 @@ export function handleSetupClick(target, showToast) {
     rerender(); return true;
   }
   if (action === 'back') { draft.step = Math.max(1, draft.step - 1); rerender(); return true; }
+  const shareStart = target.closest('[data-share-starting]');
+  if (shareStart) {
+    const player = draft.players.find(item => item.id === shareStart.dataset.shareStarting);
+    player.startingInventory = { ...player.inventory };
+    shareText(`${player.name}'s Pay to Par Cheat Card`, startingCheatCard({ name: draft.roundName || 'Pay to Par Round' }, player))
+      .then(result => { if (result.ok) showToast(result.method === 'share' ? 'Cheat card shared.' : 'Cheat card copied.'); });
+    return true;
+  }
+
   if (action === 'start') {
     saveConfiguredRound(draft);
     draft.completedRound = null;

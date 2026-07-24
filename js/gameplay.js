@@ -1,10 +1,13 @@
 import { CHEATS, CHEAT_MAP, PACKAGES } from './data.js';
-import { getActiveRound, saveActiveRound } from './state.js';
+import { getActiveRound, saveActiveRound, completeActiveRound, abandonActiveRound } from './state.js';
+import { remainingCheatCard, shareText } from './share.js';
 import { narkOverlay, handleNarkClick, resetNark } from './nark.js';
 
 let pendingCheat = null;
 let detailPlayerId = null;
 let narkOpen = false;
+let roundMenuOpen = false;
+let confirmAction = null;
 
 function esc(value) {
   return String(value ?? '').replace(/[&<>"']/g, (char) => ({
@@ -43,7 +46,7 @@ function roundHeader(round) {
       <h1>${esc(round.name)}</h1>
       <p>${round.players.length} golfers · ${complete}/${possible} scores entered</p>
     </div>
-    <button class="btn btn-outline compact-button" data-route="home">Exit</button>
+    <button class="btn btn-outline compact-button" data-open-round-menu>Round Menu</button>
   </div>`;
 }
 
@@ -143,7 +146,7 @@ function detailMarkup(round) {
         ${CHEATS.map((cheat) => `<div><span>${cheat.icon} ${cheat.name}</span><strong>${player.remainingInventory[cheat.id] ?? 0}</strong></div>`).join('')}
       </div>
 
-      <h3 class="sheet-section-title">Used today</h3>
+      <button class="btn btn-outline btn-block" data-share-remaining="${player.id}">Share Remaining Cheats</button><h3 class="sheet-section-title">Used today</h3>
       ${usageLog.length ? `<div class="usage-log">${usageLog.map((item) => `<div><span>Hole ${item.hole}</span><strong>${CHEAT_MAP[item.cheatId].icon} ${CHEAT_MAP[item.cheatId].name}</strong></div>`).join('')}</div>` : '<p class="empty-copy">Nothing used yet. Suspiciously respectable.</p>'}
     </div>
   </div>`;
@@ -161,6 +164,13 @@ function holePickerMarkup(round) {
       </div>
     </div>
   </div>`;
+}
+
+
+function roundMenuMarkup(round) {
+  if (confirmAction === 'end') return `<div class="editor-overlay" role="dialog" aria-modal="true"><div class="editor-sheet confirm-sheet"><div class="sheet-handle"></div><div class="confirm-icon">🏁</div><p class="eyebrow">End round</p><h2>Make these scores official?</h2><p>Final scores, cheat use, Nark cases, and punishments will be preserved.</p><div class="editor-actions"><button class="btn btn-outline" data-cancel-round-action>Keep playing</button><button class="btn btn-primary" data-confirm-end-round>End round</button></div></div></div>`;
+  if (confirmAction === 'abandon') return `<div class="editor-overlay" role="dialog" aria-modal="true"><div class="editor-sheet confirm-sheet"><div class="sheet-handle"></div><div class="confirm-icon">🗑️</div><p class="eyebrow">Abandon round</p><h2>Erase this entire round?</h2><p>Scores, cheats, and evidence from this active round will disappear permanently. Past history stays untouched.</p><div class="editor-actions"><button class="btn btn-outline" data-cancel-round-action>Cancel</button><button class="btn btn-danger" data-confirm-abandon-round>Abandon round</button></div></div></div>`;
+  return `<div class="editor-overlay" role="dialog" aria-modal="true"><div class="editor-sheet"><div class="sheet-handle"></div><div class="editor-head"><div><p class="eyebrow">Round controls</p><h2>${esc(round.name)}</h2></div><button class="mini-icon-button" data-close-round-menu>×</button></div><div class="round-menu-list"><button data-round-menu-action="end"><span>🏁</span><strong>End Round</strong><small>Save scores and view the final summary.</small></button><button data-round-menu-action="abandon"><span>🗑️</span><strong>Abandon Round</strong><small>Delete this active round and return home.</small></button><button data-route="home"><span>⌂</span><strong>Leave Scorecard</strong><small>The round stays saved so you can resume later.</small></button></div></div></div>`;
 }
 
 let pickerOpen = false;
@@ -189,7 +199,7 @@ export function gameplayView() {
   ${confirmationMarkup(round)}
   ${detailMarkup(round)}
   ${pickerOpen ? holePickerMarkup(round) : ''}
-  ${narkOpen ? narkOverlay(round) : ''}`;
+  ${narkOpen ? narkOverlay(round) : ''}${roundMenuOpen ? roundMenuMarkup(round) : ''}`;
 }
 
 function render() {
@@ -205,6 +215,22 @@ export function handleGameplayClick(target, showToast) {
   if (!round) return false;
 
   if (narkOpen && handleNarkClick(target, render, showToast)) return true;
+
+  if (target.closest('[data-open-round-menu]')) { roundMenuOpen = true; confirmAction = null; render(); return true; }
+  if (target.closest('[data-close-round-menu]')) { roundMenuOpen = false; confirmAction = null; render(); return true; }
+  const roundAction = target.closest('[data-round-menu-action]');
+  if (roundAction) { confirmAction = roundAction.dataset.roundMenuAction; render(); return true; }
+  if (target.closest('[data-cancel-round-action]')) { confirmAction = null; render(); return true; }
+  if (target.closest('[data-confirm-end-round]')) { completeActiveRound(round); roundMenuOpen = false; confirmAction = null; location.hash = '#results'; return true; }
+  if (target.closest('[data-confirm-abandon-round]')) { abandonActiveRound(); roundMenuOpen = false; confirmAction = null; location.hash = '#home'; return true; }
+  const shareRemaining = target.closest('[data-share-remaining]');
+  if (shareRemaining) {
+    const player = round.players.find(item => item.id === shareRemaining.dataset.shareRemaining);
+    shareText(`${player.name}'s Remaining Pay to Par Cheats`, remainingCheatCard(round, player))
+      .then(result => { if (result.ok) showToast(result.method === 'share' ? 'Remaining cheats shared.' : 'Remaining cheats copied.'); });
+    return true;
+  }
+
 
   if (target.closest('[data-open-nark]')) {
     resetNark();

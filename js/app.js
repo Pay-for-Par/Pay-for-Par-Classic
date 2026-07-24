@@ -2,12 +2,17 @@ import { registerRoute, navigate, currentRoute } from './router.js';
 import { homeView, aboutView, newRoundView, rulesView, historyView, settingsView, renderRuleTab } from './views.js';
 import { handleSetupClick, handleSetupInput } from './setup.js';
 import { gameplayView, handleGameplayClick } from './gameplay.js';
+import { resultsView } from './results.js';
+import { weatherToolView, gpsToolView } from './tools.js';
 import { getActiveRound } from './state.js';
 
 registerRoute('home', homeView);
 registerRoute('about', aboutView);
 registerRoute('new-round', newRoundView);
 registerRoute('round', gameplayView);
+registerRoute('results', resultsView);
+registerRoute('weather', weatherToolView);
+registerRoute('gps', gpsToolView);
 registerRoute('rules', rulesView);
 registerRoute('history', historyView);
 registerRoute('settings', settingsView);

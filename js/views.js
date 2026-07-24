@@ -8,10 +8,6 @@ export function homeView() {
         <p class="eyebrow">A golf game with flexible morals</p>
         <h1>PAY<br>TO PAR</h1>
         <p class="tagline">The score you'll tell everyone you shot anyway.</p>
-        <div class="hero-actions">
-          <button class="btn btn-primary" data-route="new-round">Start a round</button>
-          <button class="btn btn-secondary" data-route="about">What is this?</button>
-        </div>
       </div>
 
       <button class="welcome-card panel" data-route="about">
@@ -40,6 +36,11 @@ export function homeView() {
         <button class="action-card" data-route="settings">
           <span class="action-icon">⚙</span><strong>Settings</strong><small>House rules and app preferences.</small>
         </button>
+      </div>
+      <div class="section-heading"><div><p class="eyebrow">Essential golf tools</p><h2>Serious technology</h2></div><p>Mostly</p></div>
+      <div class="action-grid">
+        <button class="action-card" data-route="weather"><span class="action-icon">☀️</span><strong>Weather</strong><small>Advanced conditions analysis.</small></button>
+        <button class="action-card" data-route="gps"><span class="action-icon">📍</span><strong>GPS</strong><small>Critical distance information.</small></button>
       </div>
     </section>`;
 }
@@ -100,12 +101,12 @@ function overviewMarkup() {
 
     <div class="rule-copy">
       <h3>Set up the match</h3>
-      <p>Add the players, choose a suggested cheat package for each golfer, and customize any package the group wants to change. Every cheat must be approved before the round begins.</p>
+      <p>Add the players, choose a suggested cheat package for each golfer, and customize any package the group wants to change. Every cheat must be approved before the round begins. Each player’s Cheat Card can then be shared by text, email, AirDrop, or another supported app so everyone has a copy.</p>
     </div>
 
     <div class="rule-copy">
       <h3>Use your cheats wisely</h3>
-      <p>Use cheats whenever their rules allow, but choose carefully. Once your cheats are gone, you are playing on pure skill—or luck.</p>
+      <p>Use cheats whenever their rules allow, but choose carefully. Once your cheats are gone, you are playing on pure skill—or luck. A player’s updated remaining cheats can be shared again at any time from their player card.</p>
     </div>
 
     <div class="rule-copy">

@@ -115,3 +115,16 @@ export function saveCompletedRound(round) {
   history.unshift(round);
   localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 50)));
 }
+
+export function completeActiveRound(round) {
+  const completed = { ...round, status: 'completed', finishedAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+  saveCompletedRound(completed);
+  localStorage.removeItem(ROUND_KEY);
+  localStorage.setItem('pay_to_par_last_result_v1', JSON.stringify(completed));
+  return completed;
+}
+export function getLastResult() {
+  try { return JSON.parse(localStorage.getItem('pay_to_par_last_result_v1')); }
+  catch { return null; }
+}
+export function abandonActiveRound() { localStorage.removeItem(ROUND_KEY); }

@@ -1,4 +1,4 @@
-const CACHE = 'pay-to-par-phase-4-2-v1';
+const CACHE = 'pay-to-par-phase-4-3-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -12,6 +12,9 @@ const ASSETS = [
   './js/setup.js',
   './js/gameplay.js',
   './js/nark.js',
+  './js/tools.js',
+  './js/results.js',
+  './js/share.js',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/icon-512-maskable.png',
