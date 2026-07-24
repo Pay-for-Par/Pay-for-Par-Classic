@@ -1,4 +1,4 @@
-const CACHE = 'pay-to-par-phase-4-3-v2';
+const CACHE = 'pay-to-par-phase-4-4-v1';
 const ASSETS = [
   './',
   './index.html',

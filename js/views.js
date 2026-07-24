@@ -101,7 +101,7 @@ function overviewMarkup() {
 
     <div class="rule-copy">
       <h3>Set up the match</h3>
-      <p>Add the players, choose a suggested cheat package for each golfer, and customize any package the group wants to change. Every cheat must be approved before the round begins. Each player’s Cheat Card can then be shared by text, email, AirDrop, or another supported app so everyone has a copy.</p>
+      <p>Add the players, choose a suggested cheat package for each golfer, and customize any package the group wants to change. Every cheat must be approved before the round begins. Each player’s Cheat Card can then be shared individually—or the entire group can be sent in one compact message—to text, email, AirDrop, or another supported app so everyone has a copy.</p>
     </div>
 
     <div class="rule-copy">

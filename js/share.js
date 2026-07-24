@@ -31,6 +31,26 @@ Already used:
 ${used.length ? used.join('\n') : 'None yet. Suspiciously respectable.'}`;
 }
 
+
+export function allPlayersCheatCard(round, players) {
+  const playerSections = players.map((player) => {
+    const inventory = player.startingInventory || player.inventory;
+    const cheats = CHEATS
+      .filter((cheat) => (inventory[cheat.id] ?? 0) > 0)
+      .map((cheat) => `${cheat.icon} ${cheat.name} ×${inventory[cheat.id]}`)
+      .join(' · ');
+
+    return `${player.name}
+${cheats || 'No cheats selected'}`;
+  });
+
+  return `PAY TO PAR — ${round.name}
+
+${playerSections.join('\n\n')}
+
+Once they're gone, you're playing on pure skill—or luck.`;
+}
+
 export async function shareText(title, text) {
   if (navigator.share) {
     try {

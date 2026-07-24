@@ -75,6 +75,7 @@ function playerCard(round, player) {
         <span><strong>${esc(player.name)}</strong><small>${PACKAGES[player.packageId].icon} ${PACKAGES[player.packageId].name}${player.modified ? ' +' : ''}</small></span>
         <span class="running-total">${totalScore(player)}<small>total</small></span>
       </button>
+      <button class="player-share-icon" data-share-remaining="${player.id}" aria-label="Share ${esc(player.name)}'s remaining cheats" title="Share remaining cheats">↗</button>
     </div>
 
     <div class="score-entry">

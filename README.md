@@ -1,10 +1,15 @@
-# Pay to Par — Phase 4.3
+# Pay to Par — Phase 4.4
 
-Adds shareable Cheat Cards, shareable remaining cheats, End/Abandon Round controls, a basic results screen, and Weather/GPS joke tools.
+Final sharing polish before outside testing.
 
-New files:
-- js/share.js
-- js/results.js
-- js/tools.js
+## Changes
 
-Replace all matching repository files, then allow GitHub Pages to redeploy.
+- Added **Share All Players** to the final setup review.
+- Batch messages list each golfer and only cheats with quantities above zero.
+- Groups larger than four receive a message-length warning before sharing.
+- Added a visible share icon beside every golfer on the live scorecard.
+- The existing player detail screen still supports sharing remaining cheats.
+- Updated the How to Play overview to mention individual and batch sharing.
+- Bumped app assets and offline cache to version 4.4.
+
+Replace all matching repository files and allow GitHub Pages to redeploy.
