@@ -1,8 +1,11 @@
 import { startingCheatCard, allPlayersCheatCard, shareText } from './share.js';
 import { CHEATS, PACKAGES } from './data.js';
-import { cloneInventory, loadDraft, makePlayer, saveConfiguredRound, saveDraft } from './state.js';
+import { cloneInventory, loadDraft, makePlayer, saveConfiguredRound, saveDraft, resetSetupDraft} from './state.js';
 
-let draft = loadDraft();
+let draft = sessionStorage.getItem('pay_to_par_force_fresh_setup') === '1'
+  ? resetSetupDraft()
+  : loadDraft();
+sessionStorage.removeItem('pay_to_par_force_fresh_setup');
 
 function esc(value) {
   return String(value ?? '').replace(/[&<>"']/g, (char) => ({

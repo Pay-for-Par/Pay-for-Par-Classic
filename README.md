@@ -1,15 +1,17 @@
-# Pay to Par — Phase 4.4
+# Pay to Par — Phase 4.5
 
-Final sharing polish before outside testing.
+Final state-reset fix.
 
-## Changes
+## Corrected
 
-- Added **Share All Players** to the final setup review.
-- Batch messages list each golfer and only cheats with quantities above zero.
-- Groups larger than four receive a message-length warning before sharing.
-- Added a visible share icon beside every golfer on the live scorecard.
-- The existing player detail screen still supports sharing remaining cheats.
-- Updated the How to Play overview to mention individual and batch sharing.
-- Bumped app assets and offline cache to version 4.4.
+- Abandon Round now clears:
+  - The active round
+  - Saved players
+  - Selected packages
+  - Round options
+- New Round starts with a clean roster when no round is active.
+- Start Another Round from the results screen starts fresh.
+- Previous completed-round history remains untouched.
+- App and cache version bumped to 4.5.
 
 Replace all matching repository files and allow GitHub Pages to redeploy.

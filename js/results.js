@@ -17,6 +17,6 @@ export function resultsView() {
     <p class="page-lead">Final scores, questionable decisions, and enough evidence to ruin several friendships.</p>
     <div class="winner-card"><span>🏆</span><small>Winner</small><h2>${esc(winner.name)}</h2><strong>${total(winner)}</strong></div>
     <div class="results-list">${ranked.map((p,i)=>`<article class="result-row panel"><div class="result-place">${i+1}</div><div class="result-person"><strong>${esc(p.name)}</strong><small>${played(p)} holes · ${cheatUses(p)} cheats used · ${convictions(round,p.id)} convictions</small></div><div class="result-total">${total(p)}</div></article>`).join('')}</div>
-    <div class="results-actions"><button class="btn btn-primary btn-block" data-route="new-round">Start another round</button><button class="btn btn-outline btn-block" data-route="home">Back home</button></div>
+    <div class="results-actions"><button class="btn btn-primary btn-block" data-start-fresh-round>Start another round</button><button class="btn btn-outline btn-block" data-route="home">Back home</button></div>
   </section>`;
 }

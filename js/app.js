@@ -26,11 +26,28 @@ function showToast(message) {
 }
 
 document.addEventListener('click', (event) => {
+
+  const freshRound = event.target.closest('[data-start-fresh-round]');
+  if (freshRound) {
+    sessionStorage.setItem('pay_to_par_force_fresh_setup', '1');
+    localStorage.removeItem('pay_to_par_setup_draft_v3');
+    navigate('new-round');
+    return;
+  }
+
+
   if (currentRoute() === 'new-round' && handleSetupClick(event.target, showToast)) return;
   if (currentRoute() === 'round' && handleGameplayClick(event.target, showToast)) return;
 
   const routeTarget = event.target.closest('[data-route]');
-  if (routeTarget) { navigate(routeTarget.dataset.route); return; }
+  if (routeTarget) {
+    if (routeTarget.dataset.route === 'new-round' && !getActiveRound()) {
+      sessionStorage.setItem('pay_to_par_force_fresh_setup', '1');
+      localStorage.removeItem('pay_to_par_setup_draft_v3');
+    }
+    navigate(routeTarget.dataset.route);
+    return;
+  }
 
   const cheatToggle = event.target.closest('[data-cheat-toggle]');
   if (cheatToggle) { cheatToggle.closest('.cheat-item').classList.toggle('open'); return; }

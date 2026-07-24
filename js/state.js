@@ -127,4 +127,12 @@ export function getLastResult() {
   try { return JSON.parse(localStorage.getItem('pay_to_par_last_result_v1')); }
   catch { return null; }
 }
-export function abandonActiveRound() { localStorage.removeItem(ROUND_KEY); }
+export function abandonActiveRound() {
+  localStorage.removeItem(ROUND_KEY);
+  localStorage.removeItem(DRAFT_KEY);
+}
+
+export function resetSetupDraft() {
+  localStorage.removeItem(DRAFT_KEY);
+  return freshDraft();
+}

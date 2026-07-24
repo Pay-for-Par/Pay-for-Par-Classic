@@ -223,7 +223,14 @@ export function handleGameplayClick(target, showToast) {
   if (roundAction) { confirmAction = roundAction.dataset.roundMenuAction; render(); return true; }
   if (target.closest('[data-cancel-round-action]')) { confirmAction = null; render(); return true; }
   if (target.closest('[data-confirm-end-round]')) { completeActiveRound(round); roundMenuOpen = false; confirmAction = null; location.hash = '#results'; return true; }
-  if (target.closest('[data-confirm-abandon-round]')) { abandonActiveRound(); roundMenuOpen = false; confirmAction = null; location.hash = '#home'; return true; }
+  if (target.closest('[data-confirm-abandon-round]')) {
+    abandonActiveRound();
+    sessionStorage.setItem('pay_to_par_force_fresh_setup', '1');
+    roundMenuOpen = false;
+    confirmAction = null;
+    location.hash = '#home';
+    return true;
+  }
   const shareRemaining = target.closest('[data-share-remaining]');
   if (shareRemaining) {
     const player = round.players.find(item => item.id === shareRemaining.dataset.shareRemaining);
