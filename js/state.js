@@ -75,7 +75,9 @@ export function saveConfiguredRound(draft) {
       })),
     currentHole: 1,
     status: 'active',
-    actionLog: []
+    actionLog: [],
+    narkCases: [],
+    punishments: []
   };
   localStorage.setItem(ROUND_KEY, JSON.stringify(round));
   return round;

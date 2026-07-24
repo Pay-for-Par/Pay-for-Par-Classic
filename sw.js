@@ -1,4 +1,4 @@
-const CACHE = 'pay-to-par-phase-3-v1';
+const CACHE = 'pay-to-par-phase-4-v1';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './css/main.css',
   './js/app.js', './js/router.js', './js/views.js', './js/data.js', './js/state.js', './js/setup.js',

@@ -1,8 +1,10 @@
 import { CHEATS, CHEAT_MAP, PACKAGES } from './data.js';
 import { getActiveRound, saveActiveRound } from './state.js';
+import { narkOverlay, handleNarkClick, resetNark } from './nark.js';
 
 let pendingCheat = null;
 let detailPlayerId = null;
+let narkOpen = false;
 
 function esc(value) {
   return String(value ?? '').replace(/[&<>"']/g, (char) => ({
@@ -178,6 +180,7 @@ export function gameplayView() {
     ${roundHeader(round)}
     ${holeNav(round)}
     <div class="live-player-list">${round.players.map((player) => playerCard(round, player)).join('')}</div>
+    ${round.options.nark ? `<button class="nark-fab" data-open-nark><span>🚨</span><strong>NARK</strong></button>` : ''}
     <button class="btn btn-primary btn-block next-hole-button" data-next-hole>
       ${round.currentHole === 18 ? 'Review round' : `Go to hole ${round.currentHole + 1} →`}
     </button>
@@ -185,7 +188,8 @@ export function gameplayView() {
   </section>
   ${confirmationMarkup(round)}
   ${detailMarkup(round)}
-  ${pickerOpen ? holePickerMarkup(round) : ''}`;
+  ${pickerOpen ? holePickerMarkup(round) : ''}
+  ${narkOpen ? narkOverlay(round) : ''}`;
 }
 
 function render() {
@@ -199,6 +203,15 @@ function logAction(round, action) {
 export function handleGameplayClick(target, showToast) {
   const round = getActiveRound();
   if (!round) return false;
+
+  if (narkOpen && handleNarkClick(target, render, showToast)) return true;
+
+  if (target.closest('[data-open-nark]')) {
+    resetNark();
+    narkOpen = true;
+    render();
+    return true;
+  }
 
   const score = target.closest('[data-score-change]');
   if (score) {
@@ -301,3 +314,9 @@ export function handleGameplayClick(target, showToast) {
 
   return false;
 }
+
+
+document.addEventListener('nark:close', () => {
+  narkOpen = false;
+  render();
+});
